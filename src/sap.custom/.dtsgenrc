@@ -1,0 +1,12 @@
+{
+	"forwardDeclarations": {
+		"sap.custom": [
+			{
+				"kind": "interface",
+				"name": "sap.tnt.IToolHeader",
+				"module": "sap/tnt/library",
+				"export": "IToolHeader"
+			}
+		]
+	}
+}
