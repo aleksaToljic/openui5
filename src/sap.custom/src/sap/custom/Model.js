@@ -1,3 +1,4 @@
+//v1.1
 sap.ui.define(["sap/custom/util/Util"], function (Util) {
     "use strict";
 
@@ -35,6 +36,24 @@ sap.ui.define(["sap/custom/util/Util"], function (Util) {
         this.model.setProperty(path, value);
 
         return this.model;
+    };
+
+    /**
+     * getServiceURL should be used when we want to get the url of BE service that will work across all environments.
+     * Mostly used when we want to target our services via ajax, xmlHttpRequest or fetch.
+     *
+     * @param {string} service path that we want to get, it should look something like this `/CA_AR_REPORTING/api/v1/`
+     * @returns {string} Returns full path to the service that looks something like this: `../{uuid}.{app_name}/~{uuid}~/{service}`
+     */
+    Model.prototype.getServiceURL = function (service) {
+        const originalServiceModel = this.model.sServiceUrl;
+        const paths = originalServiceModel.split('~');
+        if (paths.length === 3) {
+        const servicePrefix = [paths[0], paths[1]].join('~');
+            return servicePrefix + service;
+        } else {
+            throw new Error('Failed to get serviceURL:' + service);
+        }
     };
 
     return Model;
