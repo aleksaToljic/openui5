@@ -55,9 +55,11 @@ sap.ui.define(["sap/custom/util/Util"], function (Util) {
     Model.prototype.getServiceURL = function (service) {
         const originalServiceModel = this.model.sServiceUrl;
         const paths = originalServiceModel.split("~");
+        // when deployed we'll have two ~ in link which means array.length we'll be 3
         if (paths.length === 3) {
             const servicePrefix = [paths[0], paths[1]].join("~");
             return servicePrefix + "~" + service;
+            //localhost fallback
         } else if (paths.length === 1) {
             return paths[0];
         } else {
